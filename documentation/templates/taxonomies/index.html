@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Taxonomies</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>1 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>Zola will look up the following files in the <code>templates</code> directory:</p>
+<ul>
+<li><code>$TAXONOMY_NAME/single.html</code></li>
+<li><code>$TAXONOMY_NAME/list.html</code></li>
+</ul>
+<p>First, a <code>TaxonomyTerm</code> has the following fields:</p>
+<pre style="background-color:#383838;">
+<span style="color:#d0d0ff;">name</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">slug</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">permalink</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">pages</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="color:#d0d0ff;">Page</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>and a <code>TaxonomyConfig</code>:</p>
+<pre style="background-color:#383838;">
+<span style="color:#d0d0ff;">name</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">,</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">slug</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">,</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">paginate_by</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">paginate_path</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">rss</span><span style="color:#cc7833;">: </span><span style="color:#d0d0ff;">Bool</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre><h3 id="taxonomy-list-list-html"><a class="zola-anchor" href="#taxonomy-list-list-html" aria-label="Anchor link for: taxonomy-list-list-html">🔗</a>
+Taxonomy list (<code>list.html</code>)</h3>
+<p>This template is never paginated and therefore get the following variables in all cases.</p>
+<pre style="background-color:#383838;">
+<span style="color:#95815e;">// The site config</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">config</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">Config</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The data of the taxonomy, from the config</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">taxonomy</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">TaxonomyConfig</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The current full permalink for that page</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">current_url</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The current path for that page</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">current_path</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// All terms for that taxonomy</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">terms</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="color:#d0d0ff;">TaxonomyTerm</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre><h3 id="single-term-single-html"><a class="zola-anchor" href="#single-term-single-html" aria-label="Anchor link for: single-term-single-html">🔗</a>
+Single term (<code>single.html</code>)</h3>
+<pre style="background-color:#383838;">
+<span style="color:#95815e;">// The site config</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">config</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">Config</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The data of the taxonomy, from the config</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">taxonomy</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">TaxonomyConfig</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The current full permalink for that page</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">current_url</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The current path for that page</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">current_path</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The current term being rendered</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">term</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">TaxonomyTerm</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>A paginated taxonomy term will also get a <code>paginator</code> variable, see the <a href="https://zengor.github.io/documentation/templates/pagination/">pagination page</a>
+for more details on that.</p>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

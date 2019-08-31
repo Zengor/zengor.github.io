@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Sitemap</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>1 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>Zola will look for a <code>sitemap.xml</code> file in the <code>templates</code> directory or
+use the built-in one.</p>
+<p>If your site has more than 30 000 pages, it will automatically split
+the links into multiple sitemaps as recommended by <a href="https://support.google.com/webmasters/answer/183668?hl=en">Google</a>:</p>
+<blockquote>
+<p>All formats limit a single sitemap to 50MB (uncompressed) and 50,000 URLs. 
+If you have a larger file or more URLs, you will have to break your list into multiple sitemaps. 
+You can optionally create a sitemap index file (a file that points to a list of sitemaps) and submit that single index file to Google.</p>
+</blockquote>
+<p>In such a case, Zola will use a template called <code>split_sitemap_index.xml</code> to render the index sitemap.</p>
+<p>The <code>sitemap.xml</code> template gets a single variable:</p>
+<ul>
+<li><code>entries</code>: all pages of the site, as a list of <code>SitemapEntry</code></li>
+</ul>
+<p>A <code>SitemapEntry</code> has the following fields:</p>
+<pre style="background-color:#383838;">
+<span style="color:#d0d0ff;">permalink</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">date</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">extra</span><span style="color:#cc7833;">: </span><span style="color:#d0d0ff;">Hashmap</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">, </span><span style="color:#d0d0ff;">Any</span><span style="color:#cc7833;">&gt;?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>The <code>split_sitemap_index.xml</code> also gets a single variable:</p>
+<ul>
+<li><code>sitemaps</code>: a list of permalinks to the sitemaps</li>
+</ul>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

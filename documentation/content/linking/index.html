@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Internal links &amp; deep linking</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>2 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <h2 id="heading-id-and-anchor-insertion"><a class="zola-anchor" href="#heading-id-and-anchor-insertion" aria-label="Anchor link for: heading-id-and-anchor-insertion">🔗</a>
+Heading id and anchor insertion</h2>
+<p>While rendering the markdown content, a unique id will automatically be assigned to each heading. This id is created
+by converting the heading text to a <a href="https://en.wikipedia.org/wiki/Semantic_URL#Slug">slug</a>, appending numbers at the end
+if the slug already exists for that article. For example:</p>
+<pre style="background-color:#383838;">
+<span style="color:#fd971f;"># Something exciting! &lt;- something-exciting</span><span style="color:#e6e1dc;">
+</span><span style="color:#fd971f;">## Example code &lt;- example-code</span><span style="color:#e6e1dc;">
+</span><span style="color:#e6e1dc;">
+</span><span style="color:#fd971f;"># Something else &lt;- something-else</span><span style="color:#e6e1dc;">
+</span><span style="color:#fd971f;">## Example code &lt;- example-code-1</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>You can also manually specify an id with a <code>{#…}</code> suffix on the heading line:</p>
+<pre style="background-color:#383838;">
+<span style="color:#fd971f;"># Something manual! {#manual}</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>This is useful for making deep links robust, either proactively (so that you can later change the text of a heading without breaking links to it) or retroactively (keeping the slug of the old header text, when changing the text). It can also be useful for migration of existing sites with different header id schemes, so that you can keep deep links working.</p>
+<h2 id="anchor-insertion"><a class="zola-anchor" href="#anchor-insertion" aria-label="Anchor link for: anchor-insertion">🔗</a>
+Anchor insertion</h2>
+<p>It is possible to have Zola automatically insert anchor links next to the heading, as you can see on the site you are currently
+reading if you hover a title.</p>
+<p>This option is set at the section level: the <code>insert_anchor_links</code> variable on the
+<a href="https://zengor.github.io/documentation/content/section/#front-matter">Section front-matter page</a>.</p>
+<p>The default template is very basic and will need CSS tweaks in your project to look decent.
+If you want to change the anchor template, it can easily be overwritten by
+creating a <code>anchor-link.html</code> file in the <code>templates</code> directory.</p>
+<h2 id="internal-links"><a class="zola-anchor" href="#internal-links" aria-label="Anchor link for: internal-links">🔗</a>
+Internal links</h2>
+<p>Linking to other pages and their headings is so common that Zola adds a
+special syntax to Markdown links to handle them: start the link with <code>@/</code> and point to the <code>.md</code> file you want
+to link to. The path to the file starts from the <code>content</code> directory.</p>
+<p>For example, linking to a file located at <code>content/pages/about.md</code> would be <code>[my link](@/pages/about.md)</code>.
+You can still link to an anchor directly: <code>[my link](@/pages/about.md#example)</code> will work as expected.</p>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

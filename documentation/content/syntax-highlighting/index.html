@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Syntax Highlighting</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>4 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>Zola comes with built-in syntax highlighting but you first
+need to enable it in the <a href="https://zengor.github.io/documentation/getting-started/configuration/">configuration</a>.</p>
+<p>Once this is done, Zola will automatically highlight all code blocks
+in your content. A code block in Markdown looks like the following:</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">
+```</span><span style="color:#6d9cbe;">rust</span><span style="color:#e6e1dc;">
+</span><span style="font-style:italic;color:#6e9cbe;">let</span><span style="color:#e6e1dc;"> highlight </span><span style="color:#cc7833;">= </span><span style="color:#6e9cbe;">true</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+```</span><span style="color:#e6e1dc;">
+</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>You can replace the <code>rust</code> by the language you want to highlight or not put anything to get it
+interpreted as plain text.</p>
+<p>Here is a full list of the supported languages and the short names you can use:</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">- Plain Text -&gt; [&quot;txt&quot;]</span><span style="color:#e6e1dc;">
+- Assembly x86 (NASM) -&gt; [&quot;asm&quot;, &quot;inc&quot;, &quot;nasm&quot;]</span><span style="color:#e6e1dc;">
+- Crystal -&gt; [&quot;cr&quot;]</span><span style="color:#e6e1dc;">
+- Dart -&gt; [&quot;dart&quot;]</span><span style="color:#e6e1dc;">
+- Elixir -&gt; [&quot;ex&quot;, &quot;exs&quot;]</span><span style="color:#e6e1dc;">
+- fsharp -&gt; [&quot;fs&quot;]</span><span style="color:#e6e1dc;">
+- Handlebars -&gt; [&quot;handlebars&quot;, &quot;handlebars.html&quot;, &quot;hbr&quot;, &quot;hbrs&quot;, &quot;hbs&quot;, &quot;hdbs&quot;, &quot;hjs&quot;, &quot;mu&quot;, &quot;mustache&quot;, &quot;rac&quot;, &quot;stache&quot;, &quot;template&quot;, &quot;tmpl&quot;]</span><span style="color:#e6e1dc;">
+- Jinja2 -&gt; [&quot;j2&quot;, &quot;jinja2&quot;]</span><span style="color:#e6e1dc;">
+- Julia -&gt; [&quot;jl&quot;]</span><span style="color:#e6e1dc;">
+- Kotlin -&gt; [&quot;kt&quot;, &quot;kts&quot;]</span><span style="color:#e6e1dc;">
+- Less -&gt; [&quot;less&quot;, &quot;css.less&quot;]</span><span style="color:#e6e1dc;">
+- MiniZinc (MZN) -&gt; [&quot;mzn&quot;, &quot;dzn&quot;]</span><span style="color:#e6e1dc;">
+- Nim -&gt; [&quot;nim&quot;, &quot;nims&quot;]</span><span style="color:#e6e1dc;">
+- ASP -&gt; [&quot;asa&quot;]</span><span style="color:#e6e1dc;">
+- HTML (ASP) -&gt; [&quot;asp&quot;]</span><span style="color:#e6e1dc;">
+- ActionScript -&gt; [&quot;as&quot;]</span><span style="color:#e6e1dc;">
+- AppleScript -&gt; [&quot;applescript&quot;, &quot;script editor&quot;]</span><span style="color:#e6e1dc;">
+- Batch File -&gt; [&quot;bat&quot;, &quot;cmd&quot;]</span><span style="color:#e6e1dc;">
+- NAnt Build File -&gt; [&quot;build&quot;]</span><span style="color:#e6e1dc;">
+- C# -&gt; [&quot;cs&quot;, &quot;csx&quot;]</span><span style="color:#e6e1dc;">
+- C++ -&gt; [&quot;cpp&quot;, &quot;cc&quot;, &quot;cp&quot;, &quot;cxx&quot;, &quot;c++&quot;, &quot;C&quot;, &quot;h&quot;, &quot;hh&quot;, &quot;hpp&quot;, &quot;hxx&quot;, &quot;h++&quot;, &quot;inl&quot;, &quot;ipp&quot;]</span><span style="color:#e6e1dc;">
+- C -&gt; [&quot;c&quot;, &quot;h&quot;]</span><span style="color:#e6e1dc;">
+- CSS -&gt; [&quot;css&quot;, &quot;css.erb&quot;, &quot;css.liquid&quot;]</span><span style="color:#e6e1dc;">
+- Clojure -&gt; [&quot;clj&quot;]</span><span style="color:#e6e1dc;">
+- D -&gt; [&quot;d&quot;, &quot;di&quot;]</span><span style="color:#e6e1dc;">
+- Diff -&gt; [&quot;diff&quot;, &quot;patch&quot;]</span><span style="color:#e6e1dc;">
+- Erlang -&gt; [&quot;erl&quot;, &quot;hrl&quot;, &quot;Emakefile&quot;, &quot;emakefile&quot;]</span><span style="color:#e6e1dc;">
+- HTML (Erlang) -&gt; [&quot;yaws&quot;]</span><span style="color:#e6e1dc;">
+- Git Attributes -&gt; [&quot;attributes&quot;, &quot;gitattributes&quot;, &quot;.gitattributes&quot;]</span><span style="color:#e6e1dc;">
+- Git Commit -&gt; [&quot;COMMIT_EDITMSG&quot;, &quot;MERGE_MSG&quot;, &quot;TAG_EDITMSG&quot;]</span><span style="color:#e6e1dc;">
+- Git Config -&gt; [&quot;gitconfig&quot;, &quot;.gitconfig&quot;, &quot;.gitmodules&quot;]</span><span style="color:#e6e1dc;">
+- Git Ignore -&gt; [&quot;exclude&quot;, &quot;gitignore&quot;, &quot;.gitignore&quot;]</span><span style="color:#e6e1dc;">
+- Git Link -&gt; [&quot;.git&quot;]</span><span style="color:#e6e1dc;">
+- Git Log -&gt; [&quot;gitlog&quot;]</span><span style="color:#e6e1dc;">
+- Git Rebase Todo -&gt; [&quot;git-rebase-todo&quot;]</span><span style="color:#e6e1dc;">
+- Go -&gt; [&quot;go&quot;]</span><span style="color:#e6e1dc;">
+- Graphviz (DOT) -&gt; [&quot;dot&quot;, &quot;DOT&quot;, &quot;gv&quot;]</span><span style="color:#e6e1dc;">
+- Groovy -&gt; [&quot;groovy&quot;, &quot;gvy&quot;, &quot;gradle&quot;, &quot;Jenkinsfile&quot;]</span><span style="color:#e6e1dc;">
+- HTML -&gt; [&quot;html&quot;, &quot;htm&quot;, &quot;shtml&quot;, &quot;xhtml&quot;]</span><span style="color:#e6e1dc;">
+- Haskell -&gt; [&quot;hs&quot;]</span><span style="color:#e6e1dc;">
+- Literate Haskell -&gt; [&quot;lhs&quot;]</span><span style="color:#e6e1dc;">
+- Java Server Page (JSP) -&gt; [&quot;jsp&quot;]</span><span style="color:#e6e1dc;">
+- Java -&gt; [&quot;java&quot;, &quot;bsh&quot;]</span><span style="color:#e6e1dc;">
+- Java Properties -&gt; [&quot;properties&quot;]</span><span style="color:#e6e1dc;">
+- JSON -&gt; [&quot;json&quot;, &quot;sublime-settings&quot;, &quot;sublime-menu&quot;, &quot;sublime-keymap&quot;, &quot;sublime-mousemap&quot;, &quot;sublime-theme&quot;, &quot;sublime-build&quot;, &quot;sublime-project&quot;, &quot;sublime-completions&quot;, &quot;sublime-commands&quot;, &quot;sublime-macro&quot;, &quot;sublime-color-scheme&quot;]</span><span style="color:#e6e1dc;">
+- JavaScript -&gt; [&quot;js&quot;, &quot;htc&quot;]</span><span style="color:#e6e1dc;">
+- BibTeX -&gt; [&quot;bib&quot;]</span><span style="color:#e6e1dc;">
+- LaTeX -&gt; [&quot;tex&quot;, &quot;ltx&quot;]</span><span style="color:#e6e1dc;">
+- TeX -&gt; [&quot;sty&quot;, &quot;cls&quot;]</span><span style="color:#e6e1dc;">
+- Lisp -&gt; [&quot;lisp&quot;, &quot;cl&quot;, &quot;clisp&quot;, &quot;l&quot;, &quot;mud&quot;, &quot;el&quot;, &quot;scm&quot;, &quot;ss&quot;, &quot;lsp&quot;, &quot;fasl&quot;]</span><span style="color:#e6e1dc;">
+- Lua -&gt; [&quot;lua&quot;]</span><span style="color:#e6e1dc;">
+- Makefile -&gt; [&quot;make&quot;, &quot;GNUmakefile&quot;, &quot;makefile&quot;, &quot;Makefile&quot;, &quot;makefile.am&quot;, &quot;Makefile.am&quot;, &quot;makefile.in&quot;, &quot;Makefile.in&quot;, &quot;OCamlMakefile&quot;, &quot;mak&quot;, &quot;mk&quot;]</span><span style="color:#e6e1dc;">
+- Markdown -&gt; [&quot;md&quot;, &quot;mdown&quot;, &quot;markdown&quot;, &quot;markdn&quot;]</span><span style="color:#e6e1dc;">
+- MATLAB -&gt; [&quot;matlab&quot;]</span><span style="color:#e6e1dc;">
+- OCaml -&gt; [&quot;ml&quot;, &quot;mli&quot;]</span><span style="color:#e6e1dc;">
+- OCamllex -&gt; [&quot;mll&quot;]</span><span style="color:#e6e1dc;">
+- OCamlyacc -&gt; [&quot;mly&quot;]</span><span style="color:#e6e1dc;">
+- Objective-C++ -&gt; [&quot;mm&quot;, &quot;M&quot;, &quot;h&quot;]</span><span style="color:#e6e1dc;">
+- Objective-C -&gt; [&quot;m&quot;, &quot;h&quot;]</span><span style="color:#e6e1dc;">
+- PHP -&gt; [&quot;php&quot;, &quot;php3&quot;, &quot;php4&quot;, &quot;php5&quot;, &quot;php7&quot;, &quot;phps&quot;, &quot;phpt&quot;, &quot;phtml&quot;]</span><span style="color:#e6e1dc;">
+- Pascal -&gt; [&quot;pas&quot;, &quot;p&quot;, &quot;dpr&quot;]</span><span style="color:#e6e1dc;">
+- Perl -&gt; [&quot;pl&quot;, &quot;pm&quot;, &quot;pod&quot;, &quot;t&quot;, &quot;PL&quot;]</span><span style="color:#e6e1dc;">
+- Python -&gt; [&quot;py&quot;, &quot;py3&quot;, &quot;pyw&quot;, &quot;pyi&quot;, &quot;pyx&quot;, &quot;pyx.in&quot;, &quot;pxd&quot;, &quot;pxd.in&quot;, &quot;pxi&quot;, &quot;pxi.in&quot;, &quot;rpy&quot;, &quot;cpy&quot;, &quot;SConstruct&quot;, &quot;Sconstruct&quot;, &quot;sconstruct&quot;, &quot;SConscript&quot;, &quot;gyp&quot;, &quot;gypi&quot;, &quot;Snakefile&quot;, &quot;wscript&quot;]</span><span style="color:#e6e1dc;">
+- R -&gt; [&quot;R&quot;, &quot;r&quot;, &quot;s&quot;, &quot;S&quot;, &quot;Rprofile&quot;]</span><span style="color:#e6e1dc;">
+- Rd (R Documentation) -&gt; [&quot;rd&quot;]</span><span style="color:#e6e1dc;">
+- HTML (Rails) -&gt; [&quot;rails&quot;, &quot;rhtml&quot;, &quot;erb&quot;, &quot;html.erb&quot;]</span><span style="color:#e6e1dc;">
+- JavaScript (Rails) -&gt; [&quot;js.erb&quot;]</span><span style="color:#e6e1dc;">
+- Ruby Haml -&gt; [&quot;haml&quot;, &quot;sass&quot;]</span><span style="color:#e6e1dc;">
+- Ruby on Rails -&gt; [&quot;rxml&quot;, &quot;builder&quot;]</span><span style="color:#e6e1dc;">
+- SQL (Rails) -&gt; [&quot;erbsql&quot;, &quot;sql.erb&quot;]</span><span style="color:#e6e1dc;">
+- Regular Expression -&gt; [&quot;re&quot;]</span><span style="color:#e6e1dc;">
+- reStructuredText -&gt; [&quot;rst&quot;, &quot;rest&quot;]</span><span style="color:#e6e1dc;">
+- Ruby -&gt; [&quot;rb&quot;, &quot;Appfile&quot;, &quot;Appraisals&quot;, &quot;Berksfile&quot;, &quot;Brewfile&quot;, &quot;capfile&quot;, &quot;cgi&quot;, &quot;Cheffile&quot;, &quot;config.ru&quot;, &quot;Deliverfile&quot;, &quot;Fastfile&quot;, &quot;fcgi&quot;, &quot;Gemfile&quot;, &quot;gemspec&quot;, &quot;Guardfile&quot;, &quot;irbrc&quot;, &quot;jbuilder&quot;, &quot;podspec&quot;, &quot;prawn&quot;, &quot;rabl&quot;, &quot;rake&quot;, &quot;Rakefile&quot;, &quot;Rantfile&quot;, &quot;rbx&quot;, &quot;rjs&quot;, &quot;ruby.rail&quot;, &quot;Scanfile&quot;, &quot;simplecov&quot;, &quot;Snapfile&quot;, &quot;thor&quot;, &quot;Thorfile&quot;, &quot;Vagrantfile&quot;]</span><span style="color:#e6e1dc;">
+- Rust -&gt; [&quot;rs&quot;]</span><span style="color:#e6e1dc;">
+- SQL -&gt; [&quot;sql&quot;, &quot;ddl&quot;, &quot;dml&quot;]</span><span style="color:#e6e1dc;">
+- Scala -&gt; [&quot;scala&quot;, &quot;sbt&quot;]</span><span style="color:#e6e1dc;">
+- Bourne Again Shell (bash) -&gt; [&quot;sh&quot;, &quot;bash&quot;, &quot;zsh&quot;, &quot;fish&quot;, &quot;.bash_aliases&quot;, &quot;.bash_completions&quot;, &quot;.bash_functions&quot;, &quot;.bash_login&quot;, &quot;.bash_logout&quot;, &quot;.bash_profile&quot;, &quot;.bash_variables&quot;, &quot;.bashrc&quot;, &quot;.profile&quot;, &quot;.textmate_init&quot;, &quot;.zshrc&quot;]</span><span style="color:#e6e1dc;">
+- HTML (Tcl) -&gt; [&quot;adp&quot;]</span><span style="color:#e6e1dc;">
+- Tcl -&gt; [&quot;tcl&quot;]</span><span style="color:#e6e1dc;">
+- Textile -&gt; [&quot;textile&quot;]</span><span style="color:#e6e1dc;">
+- XML -&gt; [&quot;xml&quot;, &quot;xsd&quot;, &quot;xslt&quot;, &quot;tld&quot;, &quot;dtml&quot;, &quot;rss&quot;, &quot;opml&quot;, &quot;svg&quot;]</span><span style="color:#e6e1dc;">
+- YAML -&gt; [&quot;yaml&quot;, &quot;yml&quot;, &quot;sublime-syntax&quot;]</span><span style="color:#e6e1dc;">
+- PowerShell -&gt; [&quot;ps1&quot;, &quot;psm1&quot;, &quot;psd1&quot;]</span><span style="color:#e6e1dc;">
+- SWI-Prolog -&gt; [&quot;pro&quot;]</span><span style="color:#e6e1dc;">
+- Reason -&gt; [&quot;re&quot;, &quot;rei&quot;]</span><span style="color:#e6e1dc;">
+- CMake C Header -&gt; [&quot;h.in&quot;]</span><span style="color:#e6e1dc;">
+- CMake C++ Header -&gt; [&quot;hh.in&quot;, &quot;hpp.in&quot;, &quot;hxx.in&quot;, &quot;h++.in&quot;]</span><span style="color:#e6e1dc;">
+- CMake -&gt; [&quot;CMakeLists.txt&quot;, &quot;cmake&quot;]</span><span style="color:#e6e1dc;">
+- CMakeCache -&gt; [&quot;CMakeCache.txt&quot;]</span><span style="color:#e6e1dc;">
+- Generic Config -&gt; [&quot;cfg&quot;, &quot;conf&quot;, &quot;config&quot;, &quot;ini&quot;, &quot;pro&quot;, &quot;mak&quot;, &quot;mk&quot;, &quot;Doxyfile&quot;, &quot;inputrc&quot;, &quot;.inputrc&quot;, &quot;dircolors&quot;, &quot;.dircolors&quot;, &quot;gitmodules&quot;, &quot;.gitmodules&quot;, &quot;gitignore&quot;, &quot;.gitignore&quot;, &quot;gitattributes&quot;, &quot;.gitattributes&quot;]</span><span style="color:#e6e1dc;">
+- Elm -&gt; [&quot;elm&quot;]</span><span style="color:#e6e1dc;">
+- Linker Script -&gt; [&quot;ld&quot;]</span><span style="color:#e6e1dc;">
+- Swift -&gt; [&quot;swift&quot;]</span><span style="color:#e6e1dc;">
+- TOML -&gt; [&quot;toml&quot;, &quot;tml&quot;]</span><span style="color:#e6e1dc;">
+- TypeScript -&gt; [&quot;ts&quot;]</span><span style="color:#e6e1dc;">
+- TypeScriptReact -&gt; [&quot;tsx&quot;]</span><span style="color:#e6e1dc;">
+- VimL -&gt; [&quot;vim&quot;]</span><span style="color:#e6e1dc;">
+- Nix -&gt; [&quot;nix&quot;]</span><span style="color:#e6e1dc;">
+- TOML -&gt; [&quot;toml&quot;, &quot;tml&quot;, &quot;Cargo.lock&quot;, &quot;Gopkg.lock&quot;, &quot;Pipfile&quot;]</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>If you want to highlight a language not on that list, please open an issue or a pull request on the <a href="https://github.com/getzola/zola">Zola repo</a>.
+Alternatively, the <code>extra_syntaxes</code> config option can be used to add additional syntax files.</p>
+<p>If your site source is laid out as follows:</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">.</span><span style="color:#e6e1dc;">
+├── config.toml</span><span style="color:#e6e1dc;">
+├── content/</span><span style="color:#e6e1dc;">
+│   └── ...</span><span style="color:#e6e1dc;">
+├── static/</span><span style="color:#e6e1dc;">
+│   └── ...</span><span style="color:#e6e1dc;">
+├── syntaxes/</span><span style="color:#e6e1dc;">
+│   ├── Sublime-Language1/</span><span style="color:#e6e1dc;">
+│   │   └── lang1.sublime-syntax</span><span style="color:#e6e1dc;">
+│   └── lang2.sublime-syntax</span><span style="color:#e6e1dc;">
+└── templates/</span><span style="color:#e6e1dc;">
+    └── ...</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>you would set your <code>extra_syntaxes</code> to <code>[&quot;syntaxes&quot;, &quot;syntaxes/Sublime-Language1&quot;]</code> in order to load <code>lang1.sublime-syntax</code> and <code>lang2.sublime-syntax</code>.</p>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

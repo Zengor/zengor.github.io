@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">CLI usage</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>3 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>Zola only has 3 commands: init, build and serve.</p>
+<p>You can view the help of the whole program by running <code>zola --help</code> and
+the command help by running <code>zola &lt;cmd&gt; --help</code>.</p>
+<h2 id="init"><a class="zola-anchor" href="#init" aria-label="Anchor link for: init">🔗</a>
+init</h2>
+<p>Creates the directory structure used by Zola at the given directory.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola init my_site</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>will create a new folder named <code>my_site</code> and the files/folders needed by
+zola.</p>
+<h2 id="build"><a class="zola-anchor" href="#build" aria-label="Anchor link for: build">🔗</a>
+build</h2>
+<p>This will build the whole site in the <code>public</code> directory after deleting it.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola build</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>You can override the config <code>base_url</code> by passing a new URL to the <code>base-url</code> flag.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola build</span><span style="font-style:italic;color:#fd971f;"> --base-url </span><span style="color:#e6e1dc;">$</span><span style="color:#d0d0ff;">DEPLOY_URL</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>This is useful for example when you want to deploy previews of a site to a dynamic URL, such as Netlify
+deploy previews.</p>
+<p>You can override the default output directory 'public' by passing a other value to the <code>output-dir</code> flag.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola build</span><span style="font-style:italic;color:#fd971f;"> --output-dir </span><span style="color:#e6e1dc;">$</span><span style="color:#d0d0ff;">DOCUMENT_ROOT</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>You can also point to another config file than <code>config.toml</code> like so - the position of the <code>config</code> option is important:</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola</span><span style="font-style:italic;color:#fd971f;"> --config</span><span style="color:#e6e1dc;"> config.staging.toml build</span><span style="color:#e6e1dc;">
+</span></pre><h2 id="serve"><a class="zola-anchor" href="#serve" aria-label="Anchor link for: serve">🔗</a>
+serve</h2>
+<p>This will build and serve the site using a local server. You can also specify
+the interface/port combination to use if you want something different than the default (<code>127.0.0.1:1111</code>).</p>
+<p>You can also specify different addresses for the interface and base_url using <code>-u</code>/<code>--base-url</code>, for example
+if you are running zola in a Docker container.</p>
+<p>In the event you don't want zola to run a local webserver, you can use the <code>--watch-only</code> flag.</p>
+<p>Before starting, it will delete the public directory to ensure it starts from a clean slate.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola serve</span><span style="color:#e6e1dc;">
+$ zola serve</span><span style="font-style:italic;color:#fd971f;"> --port</span><span style="color:#e6e1dc;"> 2000</span><span style="color:#e6e1dc;">
+$ zola serve</span><span style="font-style:italic;color:#fd971f;"> --interface</span><span style="color:#e6e1dc;"> 0.0.0.0</span><span style="color:#e6e1dc;">
+$ zola serve</span><span style="font-style:italic;color:#fd971f;"> --interface</span><span style="color:#e6e1dc;"> 0.0.0.0</span><span style="font-style:italic;color:#fd971f;"> --port</span><span style="color:#e6e1dc;"> 2000</span><span style="color:#e6e1dc;">
+$ zola serve</span><span style="font-style:italic;color:#fd971f;"> --interface</span><span style="color:#e6e1dc;"> 0.0.0.0</span><span style="font-style:italic;color:#fd971f;"> --base-url</span><span style="color:#e6e1dc;"> 127.0.0.1</span><span style="color:#e6e1dc;">
+$ zola serve</span><span style="font-style:italic;color:#fd971f;"> --interface</span><span style="color:#e6e1dc;"> 0.0.0.0</span><span style="font-style:italic;color:#fd971f;"> --port</span><span style="color:#e6e1dc;"> 2000</span><span style="font-style:italic;color:#fd971f;"> --output-dir</span><span style="color:#e6e1dc;"> www/public</span><span style="color:#e6e1dc;">
+$ zola serve</span><span style="font-style:italic;color:#fd971f;"> --watch-only</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>The serve command will watch all your content and will provide live reload, without
+hard refresh if possible.</p>
+<p>Zola does a best-effort to live reload but some changes cannot be handled automatically. If you
+fail to see your change or get a weird error, try to restart <code>zola serve</code>.</p>
+<p>You can also point to another config file than <code>config.toml</code> like so - the position of the <code>config</code> option is important:</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ zola</span><span style="font-style:italic;color:#fd971f;"> --config</span><span style="color:#e6e1dc;"> config.staging.toml serve</span><span style="color:#e6e1dc;">
+</span></pre><h3 id="check"><a class="zola-anchor" href="#check" aria-label="Anchor link for: check">🔗</a>
+check</h3>
+<p>The check subcommand will try to build all pages just like the build command would, but without writing any of the
+results to disk. Additionally, it always checks external links regardless of the site configuration.</p>
+<h2 id="colored-output"><a class="zola-anchor" href="#colored-output" aria-label="Anchor link for: colored-output">🔗</a>
+Colored output</h2>
+<p>Any of the three commands will emit colored output if your terminal supports it.</p>
+<p><em>Note</em>: coloring is automatically disabled when the output is redirected to a pipe or a file (ie. when the standard output is not a TTY).</p>
+<p>You can disable this behavior by exporting one of the two following environment variables:</p>
+<ul>
+<li><code>NO_COLOR</code> (the value does not matter)</li>
+<li><code>CLICOLOR=0</code></li>
+</ul>
+<p>Should you want to force the use of colors, you can set the following environment variable:</p>
+<ul>
+<li><code>CLICOLOR_FORCE=1</code></li>
+</ul>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

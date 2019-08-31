@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Search</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>1 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>Zola can build a search index from the sections and pages content to
+be used by a JavaScript library: <a href="http://elasticlunr.com/">elasticlunr</a>.</p>
+<p>To enable it, you only need to set <code>build_search_index = true</code> in your <code>config.toml</code> and Zola will
+generate an index for the <code>default_language</code> set for all pages not excluded from the search index.</p>
+<p>It is very important to set the <code>default_language</code> in your <code>config.toml</code> if you are writing a site not in
+English: the index building pipelines are very different depending on the language.</p>
+<p>After <code>zola build</code> or <code>zola serve</code>, you should see two files in your static directory:</p>
+<ul>
+<li><code>search_index.${default_language}.js</code>: so <code>search_index.en.js</code> for a default setup</li>
+<li><code>elasticlunr.min.js</code></li>
+</ul>
+<p>As each site will be different, Zola makes no assumptions about how your search and doesn't provide
+the JavaScript/CSS code to do an actual search and display results. You can however look at how this very site
+is implementing it to have an idea: <a href="https://github.com/getzola/zola/tree/master/docs/static/search.js">search.js</a>.</p>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

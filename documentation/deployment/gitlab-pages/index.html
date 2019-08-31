@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">GitLab Pages</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>3 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>We are going to use the GitLab CI runner to automatically publish the site (this CI runner is already included in your repository if you use GitLab.com).</p>
+<h2 id="repository-setup"><a class="zola-anchor" href="#repository-setup" aria-label="Anchor link for: repository-setup">🔗</a>
+Repository setup</h2>
+<p>Your repository needs to be set up to be a user or group website. This means the name of the repository has to be in the correct format.</p>
+<p>For example, under your username, <code>john</code>, you have to create a project called <code>john.gitlab.io</code>. Your project URL will be <code>https://gitlab.com/john/john.gitlab.io</code>. Once you enable GitLab Pages for your project, your website will be published under <code>https://john.gitlab.io</code>.</p>
+<p>Under your group <code>websites</code>, you created a project called <code>websites.gitlab.io</code>. Your project’s URL will be <code>https://gitlab.com/websites/websites.gitlab.io</code>. Once you enable GitLab Pages for your project, your website will be published under <code>https://websites.gitlab.io</code>.</p>
+<p>This guide assumes that your zola project is located in the root of your repository.</p>
+<h2 id="ensuring-that-the-ci-runner-can-access-your-theme"><a class="zola-anchor" href="#ensuring-that-the-ci-runner-can-access-your-theme" aria-label="Anchor link for: ensuring-that-the-ci-runner-can-access-your-theme">🔗</a>
+Ensuring that the CI runner can access your theme</h2>
+<p>Depending on how you added your theme your repository may not contain it. The best way to ensure the theme will be added is to use
+submodules. When doing this ensure you are using the <code>https</code> version of the URL.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ git submodule add {THEME_URL} themes/{THEME_NAME}</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>For example, this could look like</p>
+<pre style="background-color:#383838;">
+<span style="color:#e6e1dc;">$ git submodule add https://github.com/getzola/hyde.git themes/hyde</span><span style="color:#e6e1dc;">
+</span></pre><h2 id="setting-up-the-gitlab-ci-cd-runner"><a class="zola-anchor" href="#setting-up-the-gitlab-ci-cd-runner" aria-label="Anchor link for: setting-up-the-gitlab-ci-cd-runner">🔗</a>
+Setting up the GitLab CI/CD Runner</h2>
+<p>The second step is to tell the gitlab continous integration runner how to create the gitlab page.</p>
+<p>To do this, create a file called  <code>.gitlab-ci.yml</code> in the root directory of your repository.</p>
+<pre style="background-color:#383838;">
+<span style="color:#e8bf6a;">variables</span><span style="color:#e6e1dc;">:</span><span style="color:#e6e1dc;">
+  </span><span style="color:#95815e;"># This variable will ensure that the CI runner pulls in your theme from the submodule</span><span style="color:#e6e1dc;">
+  </span><span style="color:#e8bf6a;">GIT_SUBMODULE_STRATEGY</span><span style="color:#e6e1dc;">: </span><span style="color:#a5c261;">recursive  </span><span style="color:#e6e1dc;">
+  </span><span style="color:#95815e;"># Specify the zola version you want to use here</span><span style="color:#e6e1dc;">
+  </span><span style="color:#e8bf6a;">ZOLA_VERSION</span><span style="color:#e6e1dc;">: </span><span style="color:#c1be91;">&quot;v0.8.0&quot;</span><span style="color:#e6e1dc;">
+</span><span style="color:#e6e1dc;">
+</span><span style="color:#e8bf6a;">pages</span><span style="color:#e6e1dc;">:</span><span style="color:#e6e1dc;">
+  </span><span style="color:#e8bf6a;">script</span><span style="color:#e6e1dc;">:</span><span style="color:#e6e1dc;">
+    </span><span style="color:#95815e;"># Download the zola executable and store it in zola.tar.gz</span><span style="color:#e6e1dc;">
+    - </span><span style="color:#a5c261;">curl -L https://github.com/getzola/zola/releases/download/$ZOLA_VERSION/zola-$ZOLA_VERSION-x86_64-unknown-linux-gnu.tar.gz &gt; zola.tar.gz</span><span style="color:#e6e1dc;">
+    </span><span style="color:#95815e;"># Unpack the zola executable</span><span style="color:#e6e1dc;">
+    - </span><span style="color:#a5c261;">tar -xzf zola.tar.gz</span><span style="color:#e6e1dc;">
+    </span><span style="color:#95815e;"># Execute zola build</span><span style="color:#e6e1dc;">
+    - </span><span style="color:#a5c261;">./zola build</span><span style="color:#e6e1dc;">
+    </span><span style="color:#e6e1dc;">
+  </span><span style="color:#e8bf6a;">artifacts</span><span style="color:#e6e1dc;">:</span><span style="color:#e6e1dc;">
+    </span><span style="color:#e8bf6a;">paths</span><span style="color:#e6e1dc;">:</span><span style="color:#e6e1dc;">
+      </span><span style="color:#95815e;"># Path of our artifacts</span><span style="color:#e6e1dc;">
+      - </span><span style="color:#a5c261;">public</span><span style="color:#e6e1dc;">
+      </span><span style="color:#e6e1dc;">
+  </span><span style="color:#95815e;"># This config will only publish changes that are pushed on the master branch</span><span style="color:#e6e1dc;">
+  </span><span style="color:#e8bf6a;">only</span><span style="color:#e6e1dc;">:</span><span style="color:#e6e1dc;">
+  - </span><span style="color:#a5c261;">master</span><span style="color:#e6e1dc;">
+</span></pre>
+<p>Push this new file and... Tada! You're done! If you navigate to <code>settings &gt; pages</code> you should be able to see something like this:</p>
+<blockquote>
+<p>Congratulations! Your pages are served under:<br />
+https://john.gitlab.io</p>
+</blockquote>
+<p>More information on the process to host on GitLab pages and additional information like using a custom domain is documented 
+<a href="https://about.gitlab.com/2016/04/07/gitlab-pages-setup/">in this GitLab blog post</a>.</p>
+
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>

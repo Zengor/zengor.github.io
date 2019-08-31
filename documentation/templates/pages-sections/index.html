@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>Zola</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zengor.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Sections and Pages</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>4 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <p>Pages and sections are actually very similar.</p>
+<h2 id="page-variables"><a class="zola-anchor" href="#page-variables" aria-label="Anchor link for: page-variables">🔗</a>
+Page variables</h2>
+<p>Zola will try to load the <code>templates/page.html</code> template, the <code>page.html</code> template of the theme if one is used
+or will render the built-in template: a blank page.</p>
+<p>Whichever template you decide to render, you will get a <code>page</code> variable in your template
+with the following fields:</p>
+<pre style="background-color:#383838;">
+<span style="color:#d0d0ff;">content</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">title</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">description</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">date</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">slug</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">path</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">draft</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">Bool</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// the path, split on &#39;/&#39;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">components</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">permalink</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">summary</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">taxonomies</span><span style="color:#cc7833;">: </span><span style="color:#d0d0ff;">HashMap</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">, </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">extra</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">HashMap</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">, </span><span style="color:#d0d0ff;">Any</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Naive word count, will not work for languages without whitespace</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">word_count</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Based on https://help.medium.com/hc/en-us/articles/214991667-Read-time</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">reading_time</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// `earlier` and `later` are only populated if the section variable `sort_by` is set to `date`</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// and only set when rendering the page itself</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">earlier</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">Page</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">later</span><span style="color:#cc7833;">: </span><span style="color:#d0d0ff;">Page</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// `heavier` and `lighter` are only populated if the section variable `sort_by` is set to `weight`</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// and only set when rendering the page itself</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">heavier</span><span style="color:#cc7833;">: </span><span style="color:#d0d0ff;">Page</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">lighter</span><span style="color:#cc7833;">: </span><span style="color:#d0d0ff;">Page</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Year/month/day is only set if the page has a date and month/day are 1-indexed</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">year</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">month</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">day</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Paths of colocated assets, relative to the content directory</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">assets</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The relative paths of the parent sections until the index onef for use with the `get_section` Tera function</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The first item is the index section and the last one is the parent section</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// This is filled after rendering a page content so it will be empty in shortcodes</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">ancestors</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The relative path from the `content` directory to the markdown file</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">relative_path</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The language for the page if there is one. Default to the config `default_language`</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">lang</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Information about all the available languages for that content</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">translations</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="color:#d0d0ff;">TranslatedContent</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre><h2 id="section-variables"><a class="zola-anchor" href="#section-variables" aria-label="Anchor link for: section-variables">🔗</a>
+Section variables</h2>
+<p>By default, Zola will try to load <code>templates/index.html</code> for <code>content/_index.md</code>
+and <code>templates/section.html</code> for others <code>_index.md</code> files. If there isn't
+one, it will render the built-in template: a blank page.</p>
+<p>Whichever template you decide to render, you will get a <code>section</code> variable in your template
+with the following fields:</p>
+<pre style="background-color:#383838;">
+<span style="color:#d0d0ff;">content</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">title</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">description</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">path</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// the path, split on &#39;/&#39;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">components</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">permalink</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">extra</span><span style="color:#e6e1dc;">: </span><span style="color:#d0d0ff;">HashMap</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">, </span><span style="color:#d0d0ff;">Any</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Pages directly in this section, sorted if asked</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">pages</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="color:#d0d0ff;">Pages</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Direct subsections to this section, sorted by subsections weight</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// This only contains the path to use in the `get_section` Tera function to get</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// the actual section object if you need it</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">subsections</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Unicode word count</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">word_count</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Based on https://help.medium.com/hc/en-us/articles/214991667-Read-time</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">reading_time</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Number</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Paths of colocated assets, relative to the content directory</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">assets</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The relative paths of the parent sections until the index onef for use with the `get_section` Tera function</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The first item is the index section and the last one is the parent section</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// This is filled after rendering a page content so it will be empty in shortcodes</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">ancestors</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The relative path from the `content` directory to the markdown file</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">relative_path</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The language for the section if there is one. Default to the config `default_language`</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">lang</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// Information about all the available languages for that content</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">translations</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="color:#d0d0ff;">TranslatedContent</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre><h2 id="table-of-contents"><a class="zola-anchor" href="#table-of-contents" aria-label="Anchor link for: table-of-contents">🔗</a>
+Table of contents</h2>
+<p>Both page and section templates have a <code>toc</code> variable which corresponds to an array of <code>Header</code>.
+A <code>Header</code> has the following fields:</p>
+<pre style="background-color:#383838;">
+<span style="color:#95815e;">// The hX level</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">level</span><span style="color:#e6e1dc;">: </span><span style="color:#a5c261;">1 </span><span style="color:#cc7833;">| </span><span style="color:#a5c261;">2 </span><span style="color:#cc7833;">| </span><span style="color:#a5c261;">3 </span><span style="color:#cc7833;">| </span><span style="color:#a5c261;">4 </span><span style="color:#cc7833;">| </span><span style="color:#a5c261;">5 </span><span style="color:#cc7833;">| </span><span style="color:#a5c261;">6</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The generated slug id</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">id</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The text of the header</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">title</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// A link pointing directly to the header, using the inserted anchor</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">permalink</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// All lower level headers below this header</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">children</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">Array</span><span style="color:#cc7833;">&lt;</span><span style="color:#d0d0ff;">Header</span><span style="color:#cc7833;">&gt;</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre><h2 id="translated-content"><a class="zola-anchor" href="#translated-content" aria-label="Anchor link for: translated-content">🔗</a>
+Translated content</h2>
+<p>Both page and section have a <code>translations</code> field which corresponds to an array of <code>TranslatedContent</code>. If your site is not using multiple languages,
+this will always be an empty array.
+A <code>TranslatedContent</code> has the following fields:</p>
+<pre style="background-color:#383838;">
+<span style="color:#95815e;">// The language code for that content, empty if it is the default language</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">lang</span><span style="color:#e6e1dc;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// The title of that content if there is one</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">title</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#cc7833;">?</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span><span style="color:#95815e;">// A permalink to that content</span><span style="color:#e6e1dc;">
+</span><span style="color:#d0d0ff;">permalink</span><span style="color:#cc7833;">: </span><span style="font-style:italic;color:#6e9cbe;">String</span><span style="color:#e6e1dc;">;</span><span style="color:#e6e1dc;">
+</span></pre>
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Zengor
+                
+                
+                
+            </p>
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>
