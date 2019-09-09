@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Zola</title>
+        <title>~~</title>
         <link>https%3A//zengor.github.io/</link>
-        <description>Everything you need to make a static site engine in one binary.</description>
+        <description>||</description>
         <generator>Zola</generator>
         <language>en</language>
         <atom:link href="https%3A//zengor.github.io/categories/hello-world/rss.xml" rel="self" type="application/rss+xml"/>
