@@ -24,17 +24,12 @@
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/categories/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//zengor.github.io/categories/hello-world/</loc>
-            
-        </url>
-    
-        <url>
             <loc>https%3A//zengor.github.io/japanese/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https%3A//zengor.github.io/japanese/srs/</loc>
             
         </url>
     
@@ -44,7 +39,7 @@
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/page/1/</loc>
+            <loc>https%3A//zengor.github.io/portfolio/</loc>
             
         </url>
     
@@ -69,26 +64,6 @@
             <loc>https%3A//zengor.github.io/some-other-article/</loc>
             
                 <lastmod>2017-09-25</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//zengor.github.io/tags/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//zengor.github.io/tags/other/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//zengor.github.io/tags/rust/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//zengor.github.io/tags/ssg/</loc>
             
         </url>
     
