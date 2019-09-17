@@ -1,43 +1,72 @@
-<html>
-    <head>
-        <title>Zola</title>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Welcome to Zola!</h1>
-            <p>
-                You're seeing this page because we couldn't find a template to render.
-            </p>
-            <p>
-                To modify this page, create a <b>page.html</b> file in the templates directory or
-                <a href="https://www.getzola.org/documentation/themes/installing-and-using-themes/" target="_blank">install a theme</a>.
-                <br>
-                You can find what variables are available in this template in the <a href="https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;templates&#x2F;pages-sections&#x2F;#page-variables" target="_blank">documentation</a>.
-            </p>
-        </div>
-        <footer>
-            <a href="https://www.getzola.org/documentation/getting-started/cli-usage/" target="_blank">Get started with Zola</a>
-        </footer>
-        <style>
-            html {
-                line-height: 1.5;
-            }
-            h1 {
-                margin-bottom: 2rem;
-            }
-            .container {
-                font-family: "sans-serif";
-                text-align: center;
-                margin-top: 20vh;
-                padding: 2rem;
-                background: #e9e9e9;
-            }
-            footer {
-                position: fixed;
-                width: 100%;
-                bottom: 1rem;
-                text-align: center;
-            }
-        </style>
-    </body>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    <link rel="stylesheet" href="https://zengor.github.io/portfolio.css">
+    
+
+    <title>
+    	
+			
+				Parallelized Ant Colony Optimization
+			
+    	
+    </title>
+
+
+<body>
+	
+		
+		<header>
+			<div class="pageTitle">
+				Parallelized Ant Colony Optimization
+			</div>
+			<nav>
+				<a href="../">←Back Home←</a>
+			</nav>
+			<div class="bio">
+			
+				Graduation project for my Bachelor's degree, written in Rust. It's two instantiations of the Ant Colony Optimization metaheuristic, in sequential and parallel versions, to compare efficiency gains of parallelization in a multicore architecture.
+			
+			</div>
+			
+			<address> 
+				See project in:<br>
+				
+				<a href=https:&#x2F;&#x2F;github.com&#x2F;Zengor&#x2F;parallelized-acotsp&#x2F;><img src="/github-64px.png"></a>
+				
+			</address>
+			
+		</header>
+		
+		
+<section>
+	<div class="entry">
+		<h3 id="what-is-it">What is it?</h3>
+<p><a href="https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms">Ant Colony Optimization</a> is a metaheuristic technique inspired by the behavior of real ants. It imagines the problem space as a graph, with a collection of mostly-independent agents (artificial ants) trying to find a path. The ants walk through the graph in a probabilistic manner, depositing &quot;pheromones&quot; wherever they go, proportional to the quality of the solution they find. The pheromones influence the probability that a later ant will make the same movement. Over time, the colony will converge towards good solutions.</p>
+<p>One thing I found interesting about ACO was how its structure can be easily transferred to parallel execution in quite a few different ways. I decided to study that as part of my Bachelor's thesis, and as part of that I wanted to see how application of one model (master-slave) works out for the two most popular ACO variants (ACS and MMAS) in a multicore architecture (as most research still focuses on computer clusters).</p>
+<h3 id="details">Details</h3>
+<p>The project is implemented in Rust, using <a href="https://github.com/rayon-rs/rayon">Rayon</a>. The Travelling Salesman Problem was picked for testing as it's the prototypical problem for which ACO is implemented.</p>
+<p>The implementation is relatively straightforward, though there is a bit of ugly code repetition in a couple of places. There is a trait <code>Colony</code> which defines the basic behavior an ant colony supports, and 3 implementors, <code>Mmas</code>, <code>Acs</code>, and <code>AcsPar</code>. Once the colony is initialized, they all follow the basic ACO loop, which, in pseudocode, is:</p>
+<pre style="background-color:#282828;">
+<span style="color:#fdf4c1aa;">while not done: // time and/or iteration limit</span><span style="color:#fdf4c1aa;">
+    construct_solutions()</span><span style="color:#fdf4c1aa;">
+    update_pheromones()</span><span style="color:#fdf4c1aa;">
+</span></pre>
+<p>For all colonies, pheromones are stored in a matrix of f64s (the values are wrapped in <code>RwLock</code>s in <code>AcsPar</code>), alongside heuristic information on the problem instance (an additional heuristic that advantages edges with lesser weight, calculated once on initialization). There is an additional matrix that combines both the pheromone and metaheuristic values so that the ants do not have to make the calculation every time they read the data. </p>
+
+	</div>
+</section>
+
+	
+</body>
+
+
+</head>
 </html>

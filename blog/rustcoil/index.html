@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+<link rel="stylesheet" href="https://zengor.github.io/article.css">
+
+
+    <title>
+    	
+			
+				Rustcoil Engine
+			
+    	
+    </title>
+
+
+<body>
+	
+<main>
+	<article>
+		
+	    <header>
+	    	
+	    	<div class="pageTitle">
+	    		Rustcoil Engine 
+	    	</div>
+	    	<div class="metaInfo">
+	    		
+	    		
+	    	</div>
+			<nav><a href="../"> ←Back to aaa</a></nav>
+	    </header>
+		
+		<div class="articleContent">
+			<p>Rustcoil is an <a href="https://en.wikipedia.org/wiki/Magic:_The_Gathering">MTG</a> simulator engine written in Rust. Despite being very simple to learn, the <a href="https://www.yawgatog.com/resources/magic-rules/">MTG rules</a> to be very complex in a really interesting way, which made me want to model them in code.</p>
+<p>The <code>GameObj</code> trait represents a single object as defined within the MTG rules (not to be confused with a rust object). A <code>GameObj</code> does not have to know everything about its state, as a lot of effects modifying it should not be reflected in the object itself. </p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">trait </span><span style="color:#8ec07c;">GameObj </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">data</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; ObjData;</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre>
+<p><code>ObJData</code> is a view into an object's characteristics, status, etc. It's returned by a GameObj and is then modified by the engine to apply static and continuous abilities</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">ObjData </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">// a bunch of stuff</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre>
+<p>An <code>Ability</code> is something that can apply to a GameObj or to a player. An <code>Ability</code> is not a <code>GameObj</code> itself, but when an activated or triggered ability goes on the stack, a <code>GameObj</code> is created for it.</p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">trait </span><span style="color:#8ec07c;">Ability </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// defines which zones the ability applies in</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">is_active_in</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">zone</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">Zone) -&gt; </span><span style="color:#fa5c4b;">bool</span><span style="color:#fdf4c1aa;">;</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// creates the changes this abilities creates</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">apply</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">GameCtx) -&gt; Vec&lt;Box&lt;dyn UnitChange&gt;&gt;;</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// returns the id of the object that gave origin to this ability</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">source</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; EntityId;</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">trait </span><span style="color:#8ec07c;">TriggeredAbility </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// The collection of game events this ability is listening for</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">hooks</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">) -&gt; Vec&lt;TriggerEvent&gt;;</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// Checks for additional conditions and determines whether </span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">triggers</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut </span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fdf4c1;">event</span><span style="color:#fdf4c1aa;">: TriggerEvent, </span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">: GameCtx) -&gt; </span><span style="color:#fa5c4b;">bool</span><span style="color:#fdf4c1aa;">;</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">enum </span><span style="color:#8ec07c;">TriggerEvent </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// a custom check of the game state not defined by the above;</span><span style="color:#fdf4c1aa;">
+	State(Box&lt;dyn </span><span style="color:#fa5c4b;">fn</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">GameCtx) -&gt; </span><span style="color:#fa5c4b;">bool</span><span style="color:#fdf4c1aa;">&gt;),</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">trait </span><span style="color:#8ec07c;">StaticAbility </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="font-style:italic;color:#928374;">/// defines which zones the ability applies in</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">is_active_in</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">zone</span><span style="color:#fdf4c1aa;">: </span><span style="color:#fe8019;">&amp;</span><span style="color:#fdf4c1aa;">Zone) -&gt; </span><span style="color:#fa5c4b;">bool</span><span style="color:#fdf4c1aa;">;</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre>
+<p><code>Abilities</code> is a container for all of an objects abilities. Each kind is tracked </p>
+<pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">enum </span><span style="color:#8ec07c;">Ability </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	SpellAbility(Box&lt;dyn SpellAbility&gt;),</span><span style="color:#fdf4c1aa;">
+	Activated(Box&lt;dyn ActivatedAbility&gt;),</span><span style="color:#fdf4c1aa;">
+	Triggered(Box&lt;dyn TriggeredAbility&gt;),</span><span style="color:#fdf4c1aa;">
+	Static(Box&lt;dyn StaticAbility&gt;),</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">trait </span><span style="color:#8ec07c;">UnitChange </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">type </span><span style="color:#8ec07c;">Result</span><span style="color:#fdf4c1aa;">;</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fa5c4b;">fn </span><span style="color:#8ec07c;">apply</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fdf4c1;">self</span><span style="color:#fdf4c1aa;">, </span><span style="color:#fe8019;">&amp;</span><span style="color:#fa5c4b;">mut</span><span style="color:#fdf4c1aa;"> ctx) -&gt; </span><span style="color:#fa5c4b;">Self::</span><span style="color:#fdf4c1aa;">Result;</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre><pre style="background-color:#282828;">
+<span style="font-style:italic;color:#928374;">// how to handle deathtouch, etc?</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">MarkDamage</span><span style="color:#fdf4c1aa;">(</span><span style="color:#fa5c4b;">usize</span><span style="color:#fdf4c1aa;">, EntityId);</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">AddMana</span><span style="color:#fdf4c1aa;">(Mana, PlayerId);</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">CreateObject</span><span style="color:#fdf4c1aa;">(GameObj, Zone, PlayerId);</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">DestroyObject</span><span style="color:#fdf4c1aa;">(GameObj);</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fdf4c1aa;">
+</span><span style="color:#fa5c4b;">enum </span><span style="color:#8ec07c;">Discard </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	SelectAndDiscard {</span><span style="color:#fdf4c1aa;">
+		selecting_player: PlayerId,</span><span style="color:#fdf4c1aa;">
+		discarding_player: PlayerId,</span><span style="color:#fdf4c1aa;">
+		query: ObjQuery,</span><span style="color:#fdf4c1aa;">
+	},</span><span style="color:#fdf4c1aa;">
+	AllOf(ObjQuery, PlayerId),</span><span style="color:#fdf4c1aa;">
+	Random(PlayerId),</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre><pre style="background-color:#282828;">
+<span style="color:#fa5c4b;">struct </span><span style="color:#8ec07c;">Rustcoil </span><span style="color:#fdf4c1aa;">{</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fdf4c1;">ctx</span><span style="color:#fdf4c1aa;">: GameCtx,</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fdf4c1;">stateMachine</span><span style="color:#fdf4c1aa;">: StateMachine,</span><span style="color:#fdf4c1aa;">
+	</span><span style="color:#fdf4c1aa;">
+}</span><span style="color:#fdf4c1aa;">
+</span></pre>
+		</div>
+	</article>
+</main>
+
+</body>
+
+
+</head>
+</html>
