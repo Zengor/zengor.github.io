@@ -48,7 +48,9 @@
 		
 <section>
 	<div class="entry">
-		<h3 id="what-is-it">What is it?</h3>
+		<h3 id="background">Background</h3>
+<p>In university, I was invited to be part of a team working on the application of metaheuristics. This was not a topic covered in any of my available classes, so I found it to be a good opportunity to tackle something outside of coursework. Our actual task was to implement a hybrid of metaheuristics<sup class="footnote-reference"><a href="#1">1</a></sup> with direct solvers, but that contact with metaheuristics made me interested in doing something related for my graduation project.</p>
+<h3 id="what-is-it">What is it?</h3>
 <p><a href="https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms">Ant Colony Optimization</a> is a metaheuristic technique inspired by the behavior of real ants. It imagines the problem space as a graph, with a collection of mostly-independent agents (artificial ants) trying to find a path. The ants walk through the graph in a probabilistic manner, depositing &quot;pheromones&quot; wherever they go, proportional to the quality of the solution they find. The pheromones influence the probability that a later ant will make the same movement. Over time, the colony will converge towards good solutions.</p>
 <p>One thing I found interesting about ACO was how its structure can be easily transferred to parallel execution in quite a few different ways. I decided to study that as part of my Bachelor's thesis, and as part of that I wanted to see how application of one model (master-slave) works out for the two most popular ACO variants (ACS and MMAS) in a multicore architecture (as most research still focuses on computer clusters).</p>
 <h3 id="details">Details</h3>
@@ -60,6 +62,9 @@
     update_pheromones()</span><span style="color:#fdf4c1aa;">
 </span></pre>
 <p>For all colonies, pheromones are stored in a matrix of f64s (the values are wrapped in <code>RwLock</code>s in <code>AcsPar</code>), alongside heuristic information on the problem instance (an additional heuristic that advantages edges with lesser weight, calculated once on initialization). There is an additional matrix that combines both the pheromone and metaheuristic values so that the ants do not have to make the calculation every time they read the data. </p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>To be specific, Generic Algorithm and Simmulated Annealing.</p>
+</div>
 
 	</div>
 </section>
