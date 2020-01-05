@@ -1,74 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
         <url>
-            <loc>https%3A//zengor.github.io/</loc>
+            <loc>https://zengor.github.io/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/aboutme/</loc>
+            <loc>https://zengor.github.io/aboutme/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/blog/</loc>
+            <loc>https://zengor.github.io/blog/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/blog/rustcoil/</loc>
+            <loc>https://zengor.github.io/blog/rustcoil/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/blog/teee/</loc>
+            <loc>https://zengor.github.io/blog/teee/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/blog/test/</loc>
+            <loc>https://zengor.github.io/blog/test/</loc>
             
                 <lastmod>2019-08-20</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/japanese/</loc>
+            <loc>https://zengor.github.io/japanese/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/japanese/srs/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https%3A//zengor.github.io/japanese/topic-pronunciation/</loc>
+            <loc>https://zengor.github.io/japanese/topic-pronunciation/</loc>
             
                 <lastmod>2019-08-31</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/portfolio/</loc>
+            <loc>https://zengor.github.io/mtg-planeswalkers/</loc>
+            
+                <lastmod>2019-11-05</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/portfolio/acotsp/</loc>
+            <loc>https://zengor.github.io/portfolio/</loc>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/some-article/</loc>
+            <loc>https://zengor.github.io/portfolio/acotsp/</loc>
+            
+        </url>
+    
+        <url>
+            <loc>https://zengor.github.io/some-article/</loc>
             
                 <lastmod>2017-09-24</lastmod>
             
         </url>
     
         <url>
-            <loc>https%3A//zengor.github.io/some-other-article/</loc>
+            <loc>https://zengor.github.io/some-other-article/</loc>
             
                 <lastmod>2017-09-25</lastmod>
             
