@@ -1,2 +1,3 @@
 User-agent: *
+Allow: /
 Sitemap: https://zengor.github.io/sitemap.xml
