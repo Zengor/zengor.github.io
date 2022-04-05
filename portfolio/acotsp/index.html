@@ -61,6 +61,7 @@
     update_pheromones()
 </code></pre>
 <p>For all colonies, pheromones are stored in a matrix of f64s (the values are wrapped in <code>RwLock</code>s in <code>AcsPar</code>), alongside heuristic information on the problem instance (an additional heuristic that advantages edges with lesser weight, calculated once on initialization). There is an additional matrix that combines both the pheromone and metaheuristic values so that the ants do not have to make the calculation every time they read the data. </p>
+<hr />
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>To be specific, Generic Algorithm and Simmulated Annealing.</p>
 </div>
