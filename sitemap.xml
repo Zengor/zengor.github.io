@@ -7,19 +7,6 @@
         <loc>https://zengor.github.io/aboutme/</loc>
     </url>
     <url>
-        <loc>https://zengor.github.io/blog/</loc>
-    </url>
-    <url>
-        <loc>https://zengor.github.io/blog/rustcoil/</loc>
-    </url>
-    <url>
-        <loc>https://zengor.github.io/blog/teee/</loc>
-    </url>
-    <url>
-        <loc>https://zengor.github.io/blog/test/</loc>
-        <lastmod>2019-08-20</lastmod>
-    </url>
-    <url>
         <loc>https://zengor.github.io/japanese/</loc>
     </url>
     <url>
@@ -33,11 +20,28 @@
         <loc>https://zengor.github.io/portfolio/acotsp/</loc>
     </url>
     <url>
+        <loc>https://zengor.github.io/rustcoil/</loc>
+    </url>
+    <url>
         <loc>https://zengor.github.io/some-article/</loc>
         <lastmod>2017-09-24</lastmod>
     </url>
     <url>
         <loc>https://zengor.github.io/some-other-article/</loc>
         <lastmod>2017-09-25</lastmod>
+    </url>
+    <url>
+        <loc>https://zengor.github.io/teee/</loc>
+    </url>
+    <url>
+        <loc>https://zengor.github.io/test/</loc>
+        <lastmod>2019-08-20</lastmod>
+    </url>
+    <url>
+        <loc>https://zengor.github.io/thoughts/</loc>
+    </url>
+    <url>
+        <loc>https://zengor.github.io/thoughts/smtv-story/</loc>
+        <lastmod>2022-04-10</lastmod>
     </url>
 </urlset>
